@@ -170,7 +170,7 @@ def generateImageWithTimeOut(generator, timeout, imageSize=(2560, 1600)):
     return False
 
 
-def set_desktop(imagePath):
+def setDesktop(imagePath):
     # system(
     #     "osascript -e 'tell application \"Finder\" to set desktop picture to \"{}\" as POSIX file'".
     #     format(imagePath))
@@ -195,13 +195,16 @@ def inRange(t1, t2):
         return False
 
 
+def cleanUp():
+    system('rm *.jpg')
+    system('rm *.png')
+
+
 if __name__ == '__main__':
-    if inRange(startTime, endTime):
-        set_desktop(DAY_IMG_PATH)
+    cleanUp()
+    imagePath = generateImageWithTimeOut(
+        getattr(ImageGenerator, imageGenerator), 20.0, (2560, 1600))
+    if imagePath is not False:
+        setDesktop(imagePath)
     else:
-        imagePath = generateImageWithTimeOut(
-            getattr(ImageGenerator, imageGenerator), 20.0, (2560, 1600))
-        if imagePath is not False:
-            set_desktop(imagePath)
-        else:
-            print('Image generation failed.')
+        print('Image generation failed.')
