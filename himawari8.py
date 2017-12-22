@@ -2,10 +2,10 @@
 '''
 The script generate image for earth and set it to desktop picture
 '''
-from os import environ, system
 import json
+from datetime import datetime, time
 from io import BytesIO
-from datetime import time, datetime
+from os import environ, system
 from threading import Thread
 
 import requests
@@ -196,8 +196,8 @@ def inRange(t1, t2):
 
 
 def cleanUp():
-    system('rm *.jpg')
-    system('rm *.png')
+    system('rm -f *.jpg')
+    system('rm -f *.png')
 
 
 if __name__ == '__main__':
